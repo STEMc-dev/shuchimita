@@ -162,6 +162,11 @@ function App() {
 					</Grid>
 				</form>
 			</div>
+			<div>
+				<p style={{ fontWeight: "400" }}>
+					<span style={{ fontSize: "16px" }}>©</span>STEMc, IUB.
+				</p>
+			</div>
 		</Box>
 	);
 }

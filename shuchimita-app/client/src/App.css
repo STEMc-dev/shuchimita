@@ -89,7 +89,7 @@
 	background-repeat: repeat;
 	background-size: contain;
 	position: absolute;
-	transition: all 0.3s ease-in-out;
+	transition: all 0.2s ease-in-out;
 	/* right: 0; */
 }
 
@@ -109,7 +109,7 @@
 	font-weight: 700;
 	letter-spacing: 1.5px;
 	z-index: 20;
-	transition: all 0.2s ease-in-out;
+	transition: all 0.1s ease-in-out;
 }
 
 #register-button:hover span {
