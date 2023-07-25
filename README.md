@@ -1,2 +1,2 @@
 # shuchimita
-Automated sanitary pad dispenser
+Shuchimita is an Automated Sanitary Pad Dispenser made by STEMc IUB
