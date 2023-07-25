@@ -37,7 +37,7 @@ function App() {
 		try {
 			// Send user registration data to the backend API
 			const response = await fetch(
-				`${process.env.VITE_BACKEND_URL}/api/register`,
+				"https://shuchimita-backend.vercel.app/api/register",
 				{
 					method: "POST",
 					headers: {
