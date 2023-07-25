@@ -5,7 +5,6 @@ const createSupabaseClient = require("./supabase");
 const helperFunctions = require("./helperFunctions");
 const appController = require("./controllers/appController");
 const nodemailer = require("nodemailer");
-const { processScan } = require("./controllers/appController");
 
 require("dotenv").config();
 
