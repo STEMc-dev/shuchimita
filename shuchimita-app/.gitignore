@@ -1,0 +1,9 @@
+node_modules
+logs
+build
+.client/node_modules
+.sever/node_modules
+.sever/logs
+.client/.env
+client/.env
+server/.env
