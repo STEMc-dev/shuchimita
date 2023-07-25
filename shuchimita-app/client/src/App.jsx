@@ -36,13 +36,16 @@ function App() {
 
 		try {
 			// Send user registration data to the backend API
-			const response = await fetch(url + "/api/register", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(userData),
-			});
+			const response = await fetch(
+				`${process.env.VITE_BACKEND_URL}/api/register`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(userData),
+				}
+			);
 			console.log(userData);
 			const data = await response.json();
 			if (response.ok) {
