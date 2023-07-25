@@ -28,6 +28,10 @@ var transporter = nodemailer.createTransport({
 	},
 });
 
+app.get("/", async (req, res) => {
+	res.send("Welcome to Shuchimita App");
+});
+
 app.post("/api/sendEmail", async (req, res) => {});
 
 // API call for rgetting all registered user data
