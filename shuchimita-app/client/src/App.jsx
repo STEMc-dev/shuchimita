@@ -162,6 +162,11 @@ function App() {
 					</Grid>
 				</form>
 			</div>
+			<div>
+				<p>
+					<span>©</span> STEM Community, IUB.
+				</p>
+			</div>
 		</Box>
 	);
 }

@@ -3,7 +3,9 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const createSupabaseClient = require("./supabase");
 const helperFunctions = require("./helperFunctions");
+// const appController = require("./controllers/app.controller")
 const nodemailer = require("nodemailer");
+const { processScan } = require("./controllers/App.Controller");
 
 require("dotenv").config();
 
@@ -35,8 +37,6 @@ var transporter = nodemailer.createTransport({
 app.get("/", async (req, res) => {
 	res.json("Hello! Welcome to Shuchimita server! (version 1.0.0)");
 });
-
-app.post("/api/sendEmail", async (req, res) => {});
 
 // API call for rgetting all registered user data
 app.get("/api/getAll", async (req, res) => {
@@ -95,8 +95,9 @@ app.post("/api/register", async (req, res) => {
 	scanning.
 */
 app.post("/api/scanRfid", async (req, res) => {
-	const { scannedId, scanTime } = req.body;
-
+	const { scannedId } = req.body;
+	const scanTime = helperFunctions.getCurrentTimeUTCPlus6();
+	// res.json(scanTime);
 	try {
 		// Query the 'rfids' table to get the RFID for the scanned ID
 		const { data: userData, error: resultError } = await supabase
@@ -110,7 +111,7 @@ app.post("/api/scanRfid", async (req, res) => {
 			return res.status(404).json({ error: "No such RFID exists!" });
 		} else {
 			//start the scan proecess in the backend and wait for the response
-			const scanInfo = await helperFunctions.processScan(scannedId, scanTime);
+			const scanInfo = await processScan(scannedId, scanTime);
 			if (scanInfo.scanStatus) {
 				return res.status(202).json({
 					userData,
