@@ -1,15 +1,6 @@
 {
 	"version": 2,
-	"builds": [
-		{
-			"src": "package.json",
-			"use": "vercel-sapper"
-		}
-	],
-	"routes": [
-		{
-			"src": "/(.*)",
-			"dest": "/"
-		}
-	]
+	"name": "name-of-your-vercel-app",
+	"builds": [{ "src": "index.js", "use": "@vercel/node" }],
+	"routes": [{ "src": "/(.*)", "dest": "/index.js" }]
 }
