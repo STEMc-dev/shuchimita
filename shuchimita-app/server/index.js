@@ -33,7 +33,7 @@ var transporter = nodemailer.createTransport({
 });
 
 app.get("/", async (req, res) => {
-	res.json("Hello! Welcome to Shuchimita serve! (version 1.0.0)");
+	res.json("Hello! Welcome to Shuchimita server! (version 1.0.0)");
 });
 
 app.post("/api/sendEmail", async (req, res) => {});
