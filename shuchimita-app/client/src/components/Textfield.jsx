@@ -10,6 +10,7 @@ export default function TextFields({ label, ...other }) {
 			label={label}
 			variant="outlined"
 			color="secondary"
+			fullWidth
 			{...other}
 		/>
 	);

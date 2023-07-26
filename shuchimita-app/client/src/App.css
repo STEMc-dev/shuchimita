@@ -12,9 +12,17 @@
 .read-the-docs {
 	color: #888;
 }
+#logo{
+	height: 80px;
+	background: url("./assets/AgencyLogo.png");
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
 
 .box {
-	padding: 8px;
+
+	padding: 12px;
 	border-radius: 36px;
 	background: rgb(255, 255, 255);
 	background-image: url("../src/assets/OPSI6L0.jpg");
@@ -24,13 +32,13 @@
 	box-shadow: 11px 11px 27px #cfcfcf, -11px -11px 27px #ffffff;
 }
 #card-body {
-	/* min-width: 250px; */
 	background-color: #ffffff;
-	padding: 80px;
+	padding: 40px 50px;
 	border-radius: 36px;
 }
 
 .title-text {
+	margin-top: 20px;
 	font-weight: 900;
 	font-size: 2rem;
 	letter-spacing: 2px;
@@ -63,8 +71,8 @@
 	border-radius: 5px;
 	background: linear-gradient(
 			45deg,
-			rgba(52, 0, 62, 0.933),
-			rgba(129, 0, 103, 0.918)
+			rgba(147, 73, 174, 0.933),
+			rgba(194, 60, 149, 0.918)
 		),
 		url("./assets/OPSI6L0.jpg");
 	font-family: "Ubuntu", sans-serif;
@@ -80,16 +88,15 @@
 	/* background: rgb(105, 27, 130); */
 	background-image: linear-gradient(
 			90deg,
-			rgba(52, 0, 62, 0.633),
-			rgba(52, 0, 62, 0.33),
-			rgba(52, 0, 62, 0.633)
+			rgba(124, 20, 162, 0.782),
+			rgba(160, 40, 120, 0.711)
 		),
 		url("../src/assets/OPSI6L0.jpg");
 	background-position: center;
 	background-repeat: repeat;
 	background-size: contain;
 	position: absolute;
-	transition: all 0.3s ease-in-out;
+	transition: all 0.2s ease-in-out;
 	/* right: 0; */
 }
 
