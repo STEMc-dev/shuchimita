@@ -128,9 +128,9 @@ const processScan = async (scannedId, scanTime) => {
 				lastScannedTime: latestTime,
 				message:
 					"Scan Time Out! Please come back in " +
-					(timeLeft.hours != 0 && timeLeft.hours + " hours and ") +
-					(timeLeft.minutes != 0 && timeLeft.minutes + " minutes and ") +
-					(timeLeft.seconds != 0 && timeLeft.seconds + " seconds."),
+					(timeLeft.hours !== 0 && timeLeft.hours + " hours and ") +
+					(timeLeft.minutes !== 0 && timeLeft.minutes + " minutes and ") +
+					(timeLeft.seconds !== 0 && timeLeft.seconds + " seconds."),
 			};
 		}
 	} else {
