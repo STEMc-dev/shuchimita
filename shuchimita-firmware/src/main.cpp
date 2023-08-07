@@ -23,7 +23,6 @@ const int echoPin = 18;
 
 long duration;
 float distanceCm;
-float distanceInch;
 
 // API url
 const String API_URL = "https://shuchimita-backend.vercel.app";
@@ -134,6 +133,7 @@ void scanAPI(int rfid)
         lcd.print(message);
 
         Serial.println(message);
+        Serial.println("Running motor until a pad is dispensed");
       }
       else if (httpCode == 406)
       {
@@ -164,14 +164,9 @@ void measureDistance()
   // Calculate the distance
   distanceCm = duration * SOUND_SPEED / 2;
 
-  // Convert to inches
-  distanceInch = distanceCm * CM_TO_INCH;
-
   // Prints the distance in the Serial Monitor
   Serial.print("Distance (cm): ");
   Serial.println(distanceCm);
-  Serial.print("Distance (inch): ");
-  Serial.println(distanceInch);
 }
 
 void loop()
@@ -181,8 +176,10 @@ void loop()
   if (rdm6300.get_new_tag_id())
   {
     int lastScannedID = rdm6300.get_tag_id();
+    Serial.print("\nRFID: ");
     Serial.println(lastScannedID);
-    scanAPI(lastScannedID);
     measureDistance();
+    Serial.println("Making API call...");
+    scanAPI(lastScannedID);
   }
 }
