@@ -9,6 +9,9 @@
 
 // ****** SETUP STARTS ******
 
+// set output pin for pinging Arduino
+const int pingPin = 19;
+
 // set software serial pin for reading the RFID
 #define RDM6300_RX_PIN 4
 Rdm6300 rdm6300;
@@ -57,12 +60,12 @@ void setupLCD()
 
   lcd.print("Areh!!!");
   delay(250);
-  lcd.setCursor(0, 1);
-  lcd.print("Shihab Bhai");
-  delay(1200);
-  lcd.setCursor(0, 1);
-  lcd.print("Welcome :) ");
-  delay(3000);
+  // lcd.setCursor(0, 1);
+  // lcd.print("Shihab Bhai");
+  // delay(1200);
+  // lcd.setCursor(0, 1);
+  // lcd.print("Welcome :) ");
+  // delay(3000);
   lcd.clear();
 }
 
@@ -73,8 +76,11 @@ void setup()
   setupWiFi();
 
   // set sonar pins
-  pinMode(trigPin, OUTPUT); // Sets the trigPin as an Output
-  pinMode(echoPin, INPUT);  // Sets the echoPin as an Input
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+
+  // set ping pin
+  pinMode(pingPin, OUTPUT);
 
   rdm6300.begin(RDM6300_RX_PIN);
   Serial.println("\nPlace RFID tag near the rdm6300...");
@@ -134,6 +140,11 @@ void scanAPI(int rfid)
 
         Serial.println(message);
         Serial.println("Running motor until a pad is dispensed");
+
+        // send ping to arduino for running the motor
+        digitalWrite(pingPin, HIGH);
+        delay(100);
+        digitalWrite(pingPin, LOW);
       }
       else if (httpCode == 406)
       {

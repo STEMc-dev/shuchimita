@@ -1,4 +1,5 @@
 // defines pins numbers
+const int pingPin = 50;
 
 const int stepX = 2;
 const int dirX = 5;
@@ -12,6 +13,7 @@ char instruction = "";
 
 void setup() {
   // Sets the two pins as Outputs
+  pinMode(pingPin, INPUT);
 
   pinMode(stepX, OUTPUT);
   pinMode(dirX, OUTPUT);
@@ -24,25 +26,25 @@ void setup() {
   digitalWrite(dirX, HIGH);
 
   Serial.begin(115200);
-  Serial1.begin(115200);
 }
 
 void loop() {
-  // Enables the motor to move in a particular direction
-  // Makes 200 pulses for making one full cycle rotation
-  if (Serial1.available()) {
-    instruction = Serial1.read();
-    Serial.println(instruction);
+  int ping = digitalRead(pingPin);
+  if (ping) {
+    Serial.println("high");
+  }
+  else{
+    Serial.println("low");
   }
 
-  // int val = digitalRead(irPin);
-  // if (!val) dispenserDetected = true;
-  // if (instruction == 's') dispenserDetected = false;
+  int val = digitalRead(irPin);
+  if (!val) dispenserDetected = true;
+  if (ping) dispenserDetected = false;
 
-  // if (!dispenserDetected) {
-  //   digitalWrite(stepX, HIGH);
-  //   delayMicroseconds(50);
-  //   digitalWrite(stepX, LOW);
-  //   delayMicroseconds(50);
-  // }
+  if (!dispenserDetected) {
+    digitalWrite(stepX, HIGH);
+    delayMicroseconds(50);
+    digitalWrite(stepX, LOW);
+    delayMicroseconds(50);
+  }
 }
