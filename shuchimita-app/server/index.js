@@ -14,11 +14,12 @@ const supabase = createSupabaseClient();
 const app = express();
 // Enable CORS for all routes
 app.use(
-	cors({
-		origin: ["https://shuchimita.vercel.app"],
-		methods: ["POST", "GET"],
-		credentials: true,
-	})
+  cors()
+  // {
+  // origin: ["https://shuchimita.vercel.app"],
+  // methods: ["POST", "GET"],
+  // credentials: true,
+  // }
 );
 // Use body-parser middleware to parse JSON data
 app.use(bodyParser.json());
@@ -32,16 +33,35 @@ app.use(bodyParser.json());
 // });
 
 app.get("/", async (req, res) => {
-	res.json("Hello! Welcome to Shuchimita server! (version 1.0.0)");
+  res.json("Hello! Welcome to Shuchimita server! (version 1.0.0)");
 });
 
 // API call for rgetting all registered user data
 app.get("/api/getAll", async (req, res) => {
-	let { data: student, error } = await supabase.from("student").select("*");
-	if (error) {
-		throw error;
-	}
-	res.status(200).json(student);
+  let { data: student, error } = await supabase.from("student").select("*");
+  if (error) {
+    throw error;
+  }
+  res.status(200).json(student);
+});
+
+// Login
+app.post("/api/login", async (req, res) => {
+  try {
+    console.log(req.body);
+    const { email, password } = req.body;
+    let { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    if (error) {
+      res.status(400).json({ message: "Login failed!", data: data });
+    }
+    console.log(data);
+    res.status(200).json({ ...data });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 // API call for registering user. Rejects if user already exists

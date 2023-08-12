@@ -97,49 +97,61 @@ const insertScanTimeAndRfid = async (scannedId, scanTime, status) => {
  * @returns {Object} - returns the object which includes logs, scan status, scan time and message for the user
  */
 const processScan = async (scannedId, scanTime) => {
-	// check if rfid has been scanned before
-	const check = await checkRfid(scannedId);
-	console.log("Scanned before? ", check);
-	// if check is true then execute the following
-	if (check) {
-		// get the last scanned time
-		const latestTime = await getLatestScanTime(scannedId);
+  // check if rfid has been scanned before
+  const check = await checkRfid(scannedId);
+  console.log("Scanned before? ", check);
+  // if check is true then execute the following
+  if (check) {
+    // get the last scanned time
+    const latestTime = await getLatestScanTime(scannedId);
 
-		// get the time difference between last scanned time and scan time
-		let timeDifference =
-			new Date(scanTime).getTime() - new Date(latestTime).getTime();
+    // get the time difference between last scanned time and scan time
+    let timeDifference =
+      new Date(scanTime).getTime() - new Date(latestTime).getTime();
 
-		// if the difference is greater than
-		if (timeDifference >= threshold) {
-			const data = await insertScanTimeAndRfid(scannedId, scanTime, true);
+    // if the difference is greater than
+    if (timeDifference >= threshold) {
+      const data = await insertScanTimeAndRfid(scannedId, scanTime, true);
 
-			return {
-				...data,
-				lastScannedTime: latestTime,
-				message: "Scan Successful!",
-			};
-		} else {
-			const timeLeft = helperFunctions.getTimeLeft(threshold - timeDifference);
+      return {
+        ...data,
+        lastScannedTime: latestTime,
+        message: "Scan Successful!",
+      };
+    } else {
+      const timeLeft = helperFunctions.getTimeLeft(threshold - timeDifference);
 
-			const data = await insertScanTimeAndRfid(scannedId, scanTime, false);
+      const data = await insertScanTimeAndRfid(scannedId, scanTime, false);
 
-			return {
-				...data,
-				lastScannedTime: latestTime,
-				message:
-					"Scan Time Out! Please come back in " +
-					(timeLeft.hours === 0 ? "" : timeLeft.hours + " hours and ") +
-					(timeLeft.minutes === 0 ? "" : timeLeft.minutes + " minutes and ") +
-					(timeLeft.seconds === 0 ? "" : timeLeft.seconds + " seconds."),
-			};
-		}
-	} else {
-		const data = await insertScanTimeAndRfid(scannedId, scanTime, true);
+      return {
+        ...data,
+        lastScannedTime: latestTime,
+        message:
+          "Scan Time Out! Please come back in " +
+          (timeLeft.hours === 0 ? "" : timeLeft.hours + " hours and ") +
+          (timeLeft.minutes === 0 ? "" : timeLeft.minutes + " minutes and ") +
+          (timeLeft.seconds === 0 ? "" : timeLeft.seconds + " seconds."),
+      };
+    }
+  } else {
+    const data = await insertScanTimeAndRfid(scannedId, scanTime, true);
 
-		return { ...data, message: "Scan Successful!" };
-	}
+    return { ...data, message: "Scan Successful!" };
+  }
+};
+
+const login = async (userData) => {
+  // try {
+  // 	let { data, error } = await supabase.auth.signInWithPassword({
+  // 		email: userData.email,
+  // 		password: userData.password
+  // 	})
+  // } catch (error) {
+  // 	console.log(error);
+  // }
 };
 
 module.exports = {
-	processScan,
+  processScan,
+  login,
 };
