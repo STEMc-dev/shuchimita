@@ -44,7 +44,7 @@
 }
 
 .title-text {
-	margin: 10px 0;
+	/* margin: 10px 0; */
 	font-weight: 900;
 	font-size: 1.7rem;
 	letter-spacing: 2px;
@@ -67,6 +67,7 @@
 }
 
 #sub-title {
+	margin: 20px 0;
 	color: rgba(52, 0, 62, 0.786);
 	font-weight: 400;
 	font-size: 18px;
