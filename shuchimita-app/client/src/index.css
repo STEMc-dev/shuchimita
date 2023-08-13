@@ -18,6 +18,11 @@ input[type="number"] {
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: 100%;
 }
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
 
 
 body {
@@ -26,5 +31,6 @@ body {
 	place-items: center;
 	min-width: 320px;
 	min-height: 100vh;
+		
 }
 
