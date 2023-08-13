@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./login.styles.css"
 import Box from "@mui/material/Box"
 import { Grid } from "@mui/material"
@@ -34,6 +34,10 @@ const Login = ({ setToken }) => {
     passwordError: false,
   })
   let isRequired = true
+
+  useEffect(() => {
+    setToken(false)
+  }, [])
 
   // Handle login form submit
   const handleSubmit = async (event) => {
