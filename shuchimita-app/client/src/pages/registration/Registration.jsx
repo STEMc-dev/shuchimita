@@ -41,8 +41,8 @@ const Registration = ({ token }) => {
     try {
       // Send user registration data to the backend API
       const response = await fetch(
-        // "https://shuchimita-backend.vercel.app/api/register",
-        "http://localhost:3000/api/register",
+        "https://shuchimita-backend.vercel.app/api/register",
+        // "http://localhost:3000/api/register",
         {
           method: "POST",
           headers: {
