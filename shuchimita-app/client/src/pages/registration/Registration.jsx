@@ -87,7 +87,6 @@ const Registration = ({ token }) => {
         <Snackbar alert={alert} setAlert={setAlert} />
         <div id="card-body">
           <div id="logo"></div>
-          <p className="title-text">Welcome </p>
           <p className="title-text">Welcome to Shuchimita!</p>
           <p id="sub-title">Please register to start</p>
           <form id="register-form" onSubmit={handleSubmit}>
