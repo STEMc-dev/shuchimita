@@ -15,13 +15,13 @@ const app = express();
 // Enable CORS for all routes
 app.use(
   cors({
-    origin: ["https://shuchimita.vercel.app"],
-    methods: ["POST", "GET"],
-    credentials: true,
+    // origin: ["https://shuchimita.vercel.app"],
+    // methods: ["POST", "GET"],
+    // credentials: true,
   })
 )
 // Use body-parser middleware to parse JSON data
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 
 // var transporter = nodemailer.createTransport({
 // 	service: process.env.NODEMAILER_SERVICE,
@@ -36,7 +36,7 @@ app.get("/", async (req, res) => {
 })
 
 // API call for rgetting all registered user data
-app.get("/api/getAll", async (req, res) => {
+app.get("/api/motherload", async (req, res) => {
   let { data: student, error } = await supabase.from("student").select("*")
   if (error) {
     throw error
