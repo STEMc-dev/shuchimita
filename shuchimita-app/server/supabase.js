@@ -7,9 +7,13 @@ const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
 
 const createSupabaseClient = () => {
-	return createClient(supabaseUrl, supabaseAnonKey, {
-    auth: { persistSession: false },
-  })
+	return createClient(
+    supabaseUrl,
+    supabaseAnonKey
+    //   {
+    //   auth: { persistSession: false },
+    // }
+  )
 };
 
 module.exports = createSupabaseClient;
