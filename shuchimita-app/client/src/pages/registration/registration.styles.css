@@ -1,0 +1,151 @@
+#root {
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 2rem;
+	text-align: center;
+
+}
+
+#logo {
+	height: 80px;
+	background: url("../../assets/AgencyLogo.png");
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.box-register {
+	width: 100%;
+	padding: 12px;
+	border-radius: 36px;
+	background: rgb(255, 255, 255);
+	background-image: url("../../assets/OPSI6L0.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	box-shadow: 11px 11px 27px #cfcfcf, -11px -11px 27px #ffffff;
+}
+
+
+#card-body {
+	background-color: #ffffff;
+	padding: 40px 50px;
+	border-radius: 36px;
+}
+
+.title-text {
+	margin-top: 20px;
+	font-weight: 900;
+	font-size: 2rem;
+	letter-spacing: 2px;
+	/* font-size: 30px; */
+	/* color: rgba(255, 255, 255, 0.928); */
+	/* text-shadow: 0px 2px 6px #3b3b3b; */
+	background-image: url("../../assets/OPSI6L0.jpg");
+	background-position: center;
+	background-repeat: repeat;
+	background-size: cover;
+	/* background-repeat: repeat; */
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-webkit-font-smoothing: antialiased;
+}
+
+#tagLabel {
+	margin-top: 10px;
+	color: #e6e5e5;
+	letter-spacing: 1.2px;
+}
+
+#sub-title {
+	color: rgba(52, 0, 62, 0.786);
+	font-weight: 400;
+	font-size: 18px;
+}
+
+#logout-button {
+	/* width: 40px; */
+	background-color: blueviolet;
+}
+/* Register button */
+#register-button {
+	/* text-decoration: overline; */
+	/* position: relative; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+	background: linear-gradient(45deg,
+			rgba(147, 73, 174, 0.933),
+			rgba(194, 60, 149, 0.918)),
+		url("../../assets/OPSI6L0.jpg");
+	font-family: "Ubuntu", sans-serif;
+	box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+	border: none;
+}
+
+#register-button:after {
+	content: " ";
+	width: 0%;
+	height: 100%;
+	/* background: rgb(105, 27, 130); */
+	background-image: linear-gradient(90deg,
+			rgba(124, 20, 162, 0.782),
+			rgba(160, 40, 120, 0.711)),
+		url("../../assets/OPSI6L0.jpg");
+	background-position: center;
+	background-repeat: repeat;
+	background-size: contain;
+	position: absolute;
+	transition: all 0.2s ease-in-out;
+	/* right: 0; */
+}
+
+#register-button:hover::after {
+	right: auto;
+	left: auto;
+	width: 100%;
+}
+
+#register-button span {
+	text-align: center;
+	text-decoration: none;
+	width: 100%;
+	padding: 0px 10px;
+	color: #e6e5e5;
+	font-size: 1.125em;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	z-index: 20;
+	transition: all 0.2s ease-in-out;
+}
+
+#register-button:hover span {
+	color: #f7f7f7;
+	animation: scaleUp 0.2s ease-in-out;
+}
+
+@keyframes scaleUp {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(0.96);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+@media screen and (max-width: 480px) {
+	#root {
+		padding: 0rem;
+	}
+
+	.box-register {
+		/* height: 100vh; */
+		border-radius: 0;
+	}
+}

@@ -14,12 +14,12 @@ const supabase = createSupabaseClient();
 const app = express();
 // Enable CORS for all routes
 app.use(
-	cors({
-		origin: ["https://shuchimita.vercel.app"],
-		methods: ["POST", "GET"],
-		credentials: true,
-	})
-);
+  cors({
+    origin: ["https://shuchimita.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+)
 // Use body-parser middleware to parse JSON data
 app.use(bodyParser.json());
 
@@ -32,60 +32,110 @@ app.use(bodyParser.json());
 // });
 
 app.get("/", async (req, res) => {
-	res.json("Hello! Welcome to Shuchimita server! (version 1.0.0)");
-});
+  res.json("Hello! Welcome to Shuchimita server! (version 1.0.0)")
+})
 
 // API call for rgetting all registered user data
 app.get("/api/getAll", async (req, res) => {
-	let { data: student, error } = await supabase.from("student").select("*");
-	if (error) {
-		throw error;
-	}
-	res.status(200).json(student);
-});
+  let { data: student, error } = await supabase.from("student").select("*")
+  if (error) {
+    throw error
+  }
+  res.status(200).json(student)
+})
+
+// Login
+app.post("/api/login", async (req, res) => {
+  try {
+    console.log(req.body)
+    const { email, password } = req.body
+    let { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    })
+    if (error) {
+      res.status(400).json({ message: "Login failed!", data: data })
+    }
+    console.log(data)
+
+    res.status(200).json({ ...data })
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 // API call for registering user. Rejects if user already exists
 app.post("/api/register", async (req, res) => {
-	try {
-		// console.log(req.body);
-		const { studentName, studentId, rfid, email } = req.body;
+  try {
+    // console.log(req.body);
+    const { studentName, studentId, rfid, email } = req.body
 
-		const { data, error } = await supabase
-			.from("student")
-			.insert([
-				{
-					student_name: studentName,
-					student_id: studentId,
-					rfid_id: rfid,
-					email: email,
-				},
-			])
-			.select();
+    // Get the authorization token from the request headers
+    const token = req.headers.authorization
+    console.log("Authorization Token:", token)
+    if (!token) {
+      res.status(401).json({ error: "Unauthorized" })
+      return
+    }
+    const tokenParts = token.split(" ")
+    if (tokenParts.length !== 2 || tokenParts[0] !== "Bearer") {
+      res.status(401).json({ error: "Unauthorized" })
+      return
+    }
 
-		if (error) {
-			throw error;
-		}
+    const actualToken = tokenParts[1]
 
-		// 		transporter.sendMail({
-		// 			to: email,
-		// 			from: process.env.NODEMAILER_USER,
-		// 			subject: "Account Activation for BMC Discharge Module",
-		// 			html: `
-		// <p>Dear concerned,</p>
-		// <p>Thank you for registering to the BMC Discharge Module</p>
-		// <p>Your account will require to be activated via a link, provided below, where you will be asked to set your desired password</p>
-		// <h5>Please click on this <a href="http://www.bmchms.com/api/doctors/activateAccount/${token}">link</a> to activate your account and login using the set credentials</h5>
-		// `,
-		// 	});
+    // Verify the token and retrieve user information
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser(actualToken)
 
-		res.status(200).json({ message: "Registration successful!", data: data });
-	} catch (error) {
-		console.error("Error during registration:", error);
-		res
-			.status(500)
-			.json({ error: "Registration failed. Please try again later." });
-	}
-});
+    if (error) {
+      console.error("Supabase getUser Error:", error)
+      res.status(401).json({ error: "Unauthorized" })
+      return
+    }
+    console.log("User Object:", user)
+
+    // Proceed with the registration since the user is authenticated
+    const { data, error: insertError } = await supabase
+      .from("student")
+      .insert([
+        {
+          student_name: studentName,
+          student_id: studentId,
+          rfid_id: rfid,
+          email: email,
+        },
+      ])
+      .select()
+
+    if (insertError) {
+      throw insertError
+    }
+
+    // 		transporter.sendMail({
+    // 			to: email,
+    // 			from: process.env.NODEMAILER_USER,
+    // 			subject: "Account Activation for BMC Discharge Module",
+    // 			html: `
+    // <p>Dear concerned,</p>
+    // <p>Thank you for registering to the BMC Discharge Module</p>
+    // <p>Your account will require to be activated via a link, provided below, where you will be asked to set your desired password</p>
+    // <h5>Please click on this <a href="http://www.bmchms.com/api/doctors/activateAccount/${token}">link</a> to activate your account and login using the set credentials</h5>
+    // `,
+    // 	});
+    else {
+      res.status(200).json({ message: "Registration successful!", data: data })
+    }
+  } catch (error) {
+    console.error("Error during registration:", error)
+    res
+      .status(500)
+      .json({ error: "Registration failed. Please try again later." })
+  }
+})
 
 /* API call for when an ID is scanned. ESP32 will call this API to start the scan process
 	and check for the scanStatus boolean from the returned response to enable/disable 
