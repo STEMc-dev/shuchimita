@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom"
-import { Login, Registration } from "./pages/pages"
+// import { Login, Registration } from "./pages/pages"
+import Login from "./pages/login/Login";
+import Registration from "./pages/registration/Registration";
 
 const App = () => {
   const [token, setToken] = useState(null)
