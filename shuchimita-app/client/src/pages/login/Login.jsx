@@ -36,7 +36,7 @@ const Login = ({ setToken }) => {
   let isRequired = true
 
   useEffect(() => {
-    setToken(false)
+    setToken(null)
   }, [])
 
   // Handle login form submit
@@ -61,6 +61,7 @@ const Login = ({ setToken }) => {
       const data = await response.json()
       if (response.ok) {
         console.log(data)
+        sessionStorage.setItem("token", JSON.stringify({ ...data }))
         setAlert({
           ...alert,
           showAlert: true,
@@ -69,7 +70,7 @@ const Login = ({ setToken }) => {
         })
         setEmail("")
         setPassword("")
-        setToken({ ...data })
+        setToken({ ...data }) // Set the token in state
         navigate("/registration")
       } else {
         // console.log(data.error);
