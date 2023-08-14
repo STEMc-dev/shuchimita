@@ -27,14 +27,14 @@ const App = () => {
     <div>
       <Routes>
         <Route path={"/"} element={<Login setToken={setToken} />} />
-        {/* {token ? ( */}
-        <Route
-          path={"/registration"}
-          element={<Registration token={token} />}
-        />
-        {/* ) : (
+        {sessionStorage.getItem("token") ? (
+          <Route
+            path={"/registration"}
+            element={<Registration token={token} />}
+          />
+        ) : (
           <Route path={"/"} element={<Login setToken={setToken} />} />
-        )} */}
+        )}
       </Routes>
     </div>
   )
