@@ -15,9 +15,9 @@ const app = express();
 // Enable CORS for all routes
 app.use(
   cors({
-    // origin: ["https://shuchimita.vercel.app"],
-    // methods: ["POST", "GET"],
-    // credentials: true,
+    origin: ["https://shuchimita.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
   })
 )
 // Use body-parser middleware to parse JSON data
