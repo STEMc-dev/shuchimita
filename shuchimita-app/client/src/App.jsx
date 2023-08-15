@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import "./App.css"
 import { Routes, Route, useNavigate } from "react-router-dom"
-// import { Login, Registration } from "./pages/pages"
-import Login from "./pages/login/Login";
-import Registration from "./pages/registration/Registration";
+import { Login, Registration, Dashboard } from "./pages/pages"
+// import Login from "./pages/login/Login";
+// import Registration from "./pages/registration/Registration";
 
 const App = () => {
   const [token, setToken] = useState(null)
@@ -26,14 +27,22 @@ const App = () => {
   return (
     <div>
       <Routes>
-        <Route path={"/"} element={<Login setToken={setToken} />} />
+        <Route exact path={"/"} element={<Login setToken={setToken} />} />
         {sessionStorage.getItem("token") ? (
-          <Route
-            path={"/registration"}
-            element={<Registration token={token} />}
-          />
+          <>
+            <Route
+              exact
+              path={"/registration"}
+              element={<Registration token={token} />}
+            />
+            <Route
+              exact
+              path={"/dashboard"}
+              element={<Dashboard token={token} />}
+            />
+          </>
         ) : (
-          <Route path={"/"} element={<Login setToken={setToken} />} />
+          <Route exact path={"/"} element={<Login setToken={setToken} />} />
         )}
       </Routes>
     </div>

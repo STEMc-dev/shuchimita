@@ -1,10 +1,24 @@
-#root {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 2rem;
+#login {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
 }
 
+.box {
+	/* width: 90px; */
+	/* height: 100vh; */
+	padding: 12px;
+	border-radius: 36px;
+	background: rgb(255, 255, 255);
+	background-image: url("../../assets/OPSI6L0.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	box-shadow: 11px 11px 27px #cfcfcf, -11px -11px 27px #ffffff;
+}
 .card {
 	padding: 2em;
 }
@@ -26,16 +40,7 @@
 	object-fit: contain;
 }
 
-.box {
-	padding: 12px;
-	border-radius: 36px;
-	background: rgb(255, 255, 255);
-	background-image: url("../../assets/OPSI6L0.jpg");
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	box-shadow: 11px 11px 27px #cfcfcf, -11px -11px 27px #ffffff;
-}
+
 
 #card-body {
 	background-color: #ffffff;

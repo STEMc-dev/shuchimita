@@ -48,8 +48,8 @@ const Login = ({ setToken }) => {
     try {
       // Send user registration data to the backend API
       const response = await fetch(
-        "https://shuchimita-backend.vercel.app/api/login",
-        // "http://localhost:3000/api/login",
+        // "https://shuchimita-backend.vercel.app/api/login",
+        "http://localhost:3000/api/login",
         {
           method: "POST",
           headers: {
@@ -71,7 +71,7 @@ const Login = ({ setToken }) => {
         setEmail("")
         setPassword("")
         setToken({ ...data }) // Set the token in state
-        navigate("/registration")
+        navigate("/dashboard")
       } else {
         // console.log(data.error);
         setAlert({
@@ -88,84 +88,86 @@ const Login = ({ setToken }) => {
   }
 
   return (
-    <Box className="box">
-      <Snackbar alert={alert} setAlert={setAlert} />
-      <div id="card-body">
-        <div>
-          <div id="header">
-            <img src={logo} alt="Logo" />
-            <p className="title-text">Admin Login</p>
+    <div id="login">
+      <Box className="box">
+        <Snackbar alert={alert} setAlert={setAlert} />
+        <div id="card-body">
+          <div>
+            <div id="header">
+              <img src={logo} alt="Logo" />
+              <p className="title-text">Admin Login</p>
+            </div>
           </div>
+          <p id="sub-title">Please login to start</p>
+          <form id="register-form" onSubmit={handleSubmit}>
+            <Grid container spacing={3} direction={"column"}>
+              <Grid item>
+                <TextField
+                  id="email"
+                  name="email"
+                  label={"Email Address"}
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onBlur={(e) =>
+                    email === ""
+                      ? setError({ ...error, emailError: true })
+                      : setError({ ...error, emailError: false })
+                  }
+                  error={error.emailError}
+                  helperText={error.emailError ? "Empty field!" : ""}
+                  required={isRequired}
+                />
+              </Grid>
+              <Grid item>
+                <TextField
+                  id="password"
+                  name="password"
+                  label={"Password"}
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onBlur={(e) =>
+                    password === ""
+                      ? setError({ ...error, passwordError: true })
+                      : setError({ ...error, passwordError: false })
+                  }
+                  error={error.passwordError}
+                  helperText={error.passwordError ? "Empty field!" : ""}
+                  required={isRequired}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+            </Grid>
+            <Grid item>
+              {loading ? (
+                <CircularProgress style={{ marginTop: "50px" }} />
+              ) : (
+                <Button id="login-button" value={"Login"} type="submit" />
+              )}
+            </Grid>
+          </form>
         </div>
-        <p id="sub-title">Please login to start</p>
-        <form id="register-form" onSubmit={handleSubmit}>
-          <Grid container spacing={3} direction={"column"}>
-            <Grid item>
-              <TextField
-                id="email"
-                name="email"
-                label={"Email Address"}
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onBlur={(e) =>
-                  email === ""
-                    ? setError({ ...error, emailError: true })
-                    : setError({ ...error, emailError: false })
-                }
-                error={error.emailError}
-                helperText={error.emailError ? "Empty field!" : ""}
-                required={isRequired}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="password"
-                name="password"
-                label={"Password"}
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                onBlur={(e) =>
-                  password === ""
-                    ? setError({ ...error, passwordError: true })
-                    : setError({ ...error, passwordError: false })
-                }
-                error={error.passwordError}
-                helperText={error.passwordError ? "Empty field!" : ""}
-                required={isRequired}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
-          </Grid>
-          <Grid item>
-            {loading ? (
-              <CircularProgress style={{ marginTop: "50px" }} />
-            ) : (
-              <Button id="login-button" value={"Login"} type="submit" />
-            )}
-          </Grid>
-        </form>
-      </div>
-      <div>
-        <p id="tagLabel">
-          <span>©</span> STEM Community, IUB.
-        </p>
-      </div>
-    </Box>
+        <div>
+          <p id="tagLabel">
+            <span>©</span> STEM Community, IUB.
+          </p>
+        </div>
+      </Box>
+    </div>
   )
 }
 
