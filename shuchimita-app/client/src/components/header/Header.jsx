@@ -45,7 +45,7 @@ export default function ButtonAppBar(props) {
             edge="start"
             color="secondary"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            // sx={{ mr: 2 }}
             onClick={(e) => navigate("/dashboard")}
           >
             <img
@@ -62,6 +62,14 @@ export default function ButtonAppBar(props) {
               Shuchimita
             </Typography>
           </IconButton>
+          <Typography
+            className="title-text"
+            id="route"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
+            {props.route}
+          </Typography>
           <div>
             <div id="menuBtn">
               <Button

@@ -36,6 +36,15 @@ justify-content: center;
 	/* text-align: right; */
 }
 
+#pageTitle{
+	/* width: 100%; */
+	/* padding-left: 20px; */
+	/* text-align: left; */
+	font-size: 25px;
+	color: rgba(0, 0, 0, 0.852);
+	text-decoration:underline;
+}
+
 @media screen and (max-width: 480px) {
 	#footer{
 	position: relative;

@@ -11,6 +11,7 @@ import {
   Legend,
   Area,
   ResponsiveContainer,
+  Label,
 } from "recharts"
 
 const data = [
@@ -36,10 +37,12 @@ export default function App({ data }) {
           left: -40,
         }}
       >
-        <XAxis type="number" unit={"%"} domain={[0, 100]} />
+        <XAxis type="number" unit={"%"} domain={[0, 100]}>
+          <Label value="Amount of pads left" offset={2} position="bottom" />
+        </XAxis>
         <YAxis hide={true} dataKey="-" type="category" scale="band" />
         <Tooltip />
-        <Legend />
+        {/* <Legend /> */}
         {/* <Bar dataKey="pads" fill="#8884d8" background={{ fill: "#eee" }} /> */}
         <Bar
           dataKey="pads"

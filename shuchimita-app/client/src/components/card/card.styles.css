@@ -27,6 +27,16 @@
 	/* border-right: 1px solid #c03992; */
 }
 
+#deviceName{
+	font-size: 20px;
+	color: #a21a75;
+	font-weight: 500;
+}
+#deviceLocation{
+	font-size: 15px;
+color: #741253b7;
+}
+
 @media screen and (max-width: 480px) {
 .card{
 	text-align: left;

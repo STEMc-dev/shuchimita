@@ -84,7 +84,7 @@ const Registration = ({ token }) => {
 
   return (
     <>
-      <Header handleLogout={handleLogout} dash={true} />
+      <Header handleLogout={handleLogout} dash={true} route={"/Registration"} />
       <div id="register">
         <Box className="box-register">
           <Snackbar alert={alert} setAlert={setAlert} />

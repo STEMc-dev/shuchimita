@@ -8,7 +8,8 @@ const Card = (props) => {
   return (
     <div className="card">
       <div id="device">
-        <p style={{ fontSize: "20px" }}> {props.data.deviceName}: </p>
+        <p id="deviceName"> {props.data.deviceName}: </p>
+        <p id="deviceLocation"> Location: {props.data.location}</p>
       </div>
       <div id="chart">
         <HorizontalChart data={props.data} />

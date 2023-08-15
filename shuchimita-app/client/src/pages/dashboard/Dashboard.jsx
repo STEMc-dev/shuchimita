@@ -15,18 +15,18 @@ const Dashboard = ({ token }) => {
   console.log("user: ", token)
 
   const data = [
-    { deviceName: "Device 1", pads: 30 },
-    { deviceName: "Device 2", pads: 50 },
-    { deviceName: "Device 3", pads: 80 },
-    { deviceName: "Device 4", pads: 20 },
-    { deviceName: "Device 5", pads: 73 },
-    { deviceName: "Device 6", pads: 10 },
+    { deviceName: "Device 1", location: "DMK Level 3", pads: 30 },
+    { deviceName: "Device 2", location: "Jubilee Level 2", pads: 50 },
+    { deviceName: "Device 3", location: "Gym", pads: 80 },
+    { deviceName: "Device 4", location: "Main Level 4", pads: 20 },
+    { deviceName: "Device 5", location: "Lobby", pads: 73 },
+    { deviceName: "Device 6", location: "Meds Room", pads: 10 },
   ]
   return (
     <Box>
-      <Header handleLogout={handleLogout} />
+      <Header handleLogout={handleLogout} route={"/Admin Dashboard"} />
       <div id="dashboard">
-        <h2>% of Pads in each device</h2>
+        {/* <p id="pageTitle">List of devices</p> */}
         <div id="gallery">
           {data.map((el) => {
             return <Card data={el} />
