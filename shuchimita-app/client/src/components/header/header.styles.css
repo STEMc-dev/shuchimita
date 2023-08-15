@@ -1,0 +1,38 @@
+#menuBtn{
+	display: none;
+}
+.header{
+	background-color: rgb(255, 245, 255);
+	box-shadow: none !important;
+	justify-content: space-between;
+
+}
+#navBtn{
+	display: flex;
+	justify-content: end;
+	gap: 20px;
+
+}
+#route{
+font-size: 16px;
+}
+
+#registerBtn{
+background-color: #c23c95ea;
+box-shadow: none;
+}
+#registerBtn:hover{
+	background-color: #c31b8bea;
+	}
+
+	@media screen and (max-width: 480px) {
+		#menuBtn{
+			display: block;
+		}
+		#navBtn{
+			display: none;
+		}
+		#route{
+			display: none;
+			}
+	}

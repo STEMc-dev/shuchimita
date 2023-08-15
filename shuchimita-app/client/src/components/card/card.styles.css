@@ -1,0 +1,47 @@
+
+
+.card{
+	/* word-break: break-all; */
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	justify-content:space-between;
+	align-items: center;
+	flex-wrap:nowrap;
+	border: 2px dashed #c03992;
+	max-height: 250px;
+	max-width: 500px;
+	border-radius: 10px;
+	gap: 20px;
+	padding: 20px;
+
+}
+#chart{
+	width: 100%;
+	height: 100%;
+}
+#device{
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	/* border-right: 1px solid #c03992; */
+}
+
+#deviceName{
+	font-size: 20px;
+	color: #a21a75;
+	font-weight: 500;
+}
+#deviceLocation{
+	font-size: 15px;
+color: #741253b7;
+}
+
+@media screen and (max-width: 480px) {
+.card{
+	text-align: left;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+}

@@ -21,7 +21,7 @@ app.use(
   })
 )
 // Use body-parser middleware to parse JSON data
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 
 // var transporter = nodemailer.createTransport({
 // 	service: process.env.NODEMAILER_SERVICE,
@@ -36,7 +36,7 @@ app.get("/", async (req, res) => {
 })
 
 // API call for rgetting all registered user data
-app.get("/api/getAll", async (req, res) => {
+app.get("/api/motherload", async (req, res) => {
   let { data: student, error } = await supabase.from("student").select("*")
   if (error) {
     throw error
