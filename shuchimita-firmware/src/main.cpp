@@ -10,7 +10,9 @@
 // ****** SETUP STARTS ******
 
 // set output pin for pinging Arduino
-const int pingPin = 19;
+const int successPing = 32;
+const int loadingPing = 33;
+const int failPing = 25;
 
 // set software serial pin for reading the RFID
 #define RDM6300_RX_PIN 4
@@ -80,7 +82,13 @@ void setup()
   pinMode(echoPin, INPUT);
 
   // set ping pin
-  pinMode(pingPin, OUTPUT);
+  pinMode(successPing, OUTPUT);
+  pinMode(loadingPing, OUTPUT);
+  pinMode(failPing, OUTPUT);
+
+  digitalWrite(successPing, LOW);
+  digitalWrite(loadingPing, LOW);
+  digitalWrite(failPing, LOW);
 
   rdm6300.begin(RDM6300_RX_PIN);
   Serial.println("\nPlace RFID tag near the rdm6300...");
@@ -88,8 +96,19 @@ void setup()
 
 // ****** LOOPS STARTS ******
 
+void sendPing(int pingPin)
+{
+  // send ping to arduino for running the motor
+  digitalWrite(pingPin, HIGH);
+  delay(200);
+  digitalWrite(pingPin, LOW);
+}
+
 void scanAPI(int rfid)
 {
+  // ! loading ping
+  sendPing(loadingPing);
+
   StaticJsonDocument<200> jsonBody;
   jsonBody["scannedId"] = rfid;
   String jsonString;
@@ -106,9 +125,13 @@ void scanAPI(int rfid)
 
   int httpCode = http.POST(jsonString);
   String payload = http.getString();
+  Serial.println(httpCode);
+  Serial.println(payload);
 
   if (httpCode == 404)
   {
+    // ! fail ping
+    sendPing(failPing);
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("You're not");
@@ -126,6 +149,8 @@ void scanAPI(int rfid)
     {
       Serial.print("JSON parsing error: ");
       Serial.println(error.c_str());
+      // ! fail ping
+      sendPing(failPing);
     }
     else
     {
@@ -141,13 +166,14 @@ void scanAPI(int rfid)
         Serial.println(message);
         Serial.println("Running motor until a pad is dispensed");
 
-        // send ping to arduino for running the motor
-        digitalWrite(pingPin, HIGH);
-        delay(100);
-        digitalWrite(pingPin, LOW);
+        // ! send ping to arduino for running the motor
+        sendPing(successPing);
       }
       else if (httpCode == 406)
       {
+        // ! fail ping
+        sendPing(failPing);
+
         lcd.clear();
         lcd.setCursor(0, 0);
         lcd.print(message);
@@ -189,8 +215,11 @@ void loop()
     int lastScannedID = rdm6300.get_tag_id();
     Serial.print("\nRFID: ");
     Serial.println(lastScannedID);
-    measureDistance();
+    // measureDistance();
     Serial.println("Making API call...");
+    // sendPing(successPing);
+    // sendPing(loadingPing);
+    // sendPing(failPing);
     scanAPI(lastScannedID);
   }
 }
